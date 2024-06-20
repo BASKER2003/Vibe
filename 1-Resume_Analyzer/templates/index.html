@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Analyzer</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    
+<link href="{{ url_for('static', filename='stylehf.css') }}" rel="stylesheet" media="all">    
+    <style>
+
+        body{
+            background-image: url("{{ url_for('static', filename='b1.jpg') }}");
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        form{
+            margin-top: 20px;
+        }
+        /* Custom CSS */
+
+/* Center the error message */
+#error-message {
+    text-align: center;
+    color: red;
+    margin-bottom: 10px;
+}
+
+/* Adjust container width */
+.custom-container {
+    max-width: 800px;
+    margin-top: 50px;
+    /* max-height: 400px; */
+    
+
+}
+
+/* Style form */
+.custom-form {
+    padding: 20px;
+    background-color: #ad9f9f;
+    border-radius: 5px;
+
+}
+
+
+/* Style form labels */
+label {
+    font-weight: bold;
+}
+
+/* Style select dropdown */
+.form-control,
+.form-control-file {
+    margin-bottom: 10px;
+}
+
+/* Adjust file input width */
+.form-control-file {
+    width: 100%;
+}
+
+/* Style submit button */
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+/* Hover effect on submit button */
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+/* Style input[type="number"] */
+#num_resumes {
+    /* width: 150px; Set the width to your preferred size */
+    padding: 8px 12px; /* Adjust padding for better appearance */
+    font-size: 16px; /* Adjust font size for better readability */
+    border-radius: 5px; /* Add rounded corners for a modern look */
+    border: 1px solid #ccc; /* Add a border for clarity */
+    box-sizing: border-box; /* Include padding and border in the width */
+}
+
+.font{
+    text-align: center;
+    color:white;
+}
+
+hr{
+    
+    width: 100%; /* Adjust the width as needed */
+    height: 1px; /* Adjust the height as needed */
+    background-color: purple; /* Adjust the color as needed */
+    margin: 10px 0; /* Adjust the margin as needed */
+}
+
+
+
+
+/* Make the form responsive */
+@media (max-width: 768px) {
+    .custom-container {
+        max-width: 90%;
+        margin-top: 100px;
+    }
+}
+
+        .error-message {
+            color: red;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    
+    <header id="custom-header">
+        <div class="container-nav">
+            <div class="custom-navbar-header">
+                <!-- Logo -->
+                <div class="custom-navbar-brand">
+                    <a class="custom-logo" href="http://localhost:80/Vibe/main.php">(VIBE)</a>
+                </div>
+                <!-- Navigation -->
+                <nav id="custom-nav">
+                    <ul class="custom-main-menu">
+                        <li><a href="http://localhost:80/Vibe/main.php">Home</a></li>
+                        <li class="custom-dropdown">
+                            <a class="custom-dropbtn" href="javascript:void(0)">Services <span>&#11167;</span></a>
+                            <div class="custom-dropdown-content">
+								<a href="http://127.0.0.1:5000">Career Prediction</a>
+								<a href="http://127.0.0.1:5001">Resume Analyzer</a>
+								<a href="http://localhost:80/Vibe/1-Job/index.php">Job Recommendations</a>
+								<a href="http://localhost:80/Vibe/1-Course/index.php">Course Recommendations</a>
+								<a href="http://localhost:80/Vibe/blog.php">Knowledge Network</a>
+                            </div>
+                        </li>
+                        <li><a href="http://localhost:80/Vibe/main.php#about">About Us</a></li>
+                        <li><a href="http://localhost:80/Vibe/contact.php">Contact Us</a></li>
+                        <li><a href="http://localhost:80/Vibe/logout.php">Log out</a></li>
+                    </ul>
+                </nav>
+                <!-- /Navigation -->
+            </div>
+        </div>
+    </header>
+    
+
+    <div class="container custom-container"><br>
+        <h1 class="font">Resume Analyzer</h1><hr>
+
+        <!-- Error message display -->
+        <div class="error-message" id="error-message"></div>
+        <form class="custom-form" action="/upload" method="post" enctype="multipart/form-data">
+            <div class="form-group"><br>
+                <label for="job_input">Choose Job Description Input:</label>
+                <select class="form-control" id="job_input" name="job_input" required>
+                    <option value="">--Select--</option>
+                    <option value="paste">Paste Job Description</option>
+                    <option value="upload">Upload Job Description</option>
+                </select>
+            </div><br>
+            <div id="paste_job_desc" class="form-group" style="display:none;">
+                <label for="job_description">Job Description:</label>
+                <textarea class="form-control" id="job_description" name="job_description" rows="4"></textarea>
+            </div>
+            <div id="upload_job_desc" class="form-group" style="display:none;">
+                <label for="job_file">Upload Job Description:</label>
+                <input type="file" class="form-control-file" id="job_file" name="job_file" accept=".txt,.docx,.pdf">
+            </div>
+            <div class="form-group">
+                <label for="num_resumes">Number of Resumes to Analyze (1-10):</label>
+                <input type="number" class="form-control" id="num_resumes" name="num_resumes" min="1" max="10" required>
+            </div><br>
+            <div class="form-group">
+                <label for="resumes">Upload Resumes (up to 10):</label>
+                <input type="file" class="form-control-file" id="resumes" name="resumes" accept=".pdf,.doc,.docx" multiple required>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-primary btn-block">Score Resumes</button>
+        </form>
+    </div>
+<br><br><br>
+    <footer id="survey-footer" class="section">
+        <div class="container-footer">
+            <div class="row">
+                <div class="col-md-6 col-sm-12">
+                    <div class="footer-logo">
+                        <a class="logo" href="http://localhost:80/Vibe/main.php">(VIBE)</a>
+                    </div>
+                </div>
+                <div class="col-md-4 col-md-offset-2 col-sm-12">
+                    <div class="footer-social">
+                        <!-- Add social media links or icons here -->
+                    </div>
+                </div>
+            </div>
+            <div id="survey-bottom-footer" class="row">
+                <div class="col-md-12 text-center">
+                    <div class="footer-copyright">
+                        <span>&copy; 2024. All Rights Reserved.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        document.getElementById('job_input').addEventListener('change', function() {
+            if (this.value === 'paste') {
+                document.getElementById('paste_job_desc').style.display = 'block';
+                document.getElementById('upload_job_desc').style.display = 'none';
+            } else if (this.value === 'upload') {
+                document.getElementById('paste_job_desc').style.display = 'none';
+                document.getElementById('upload_job_desc').style.display = 'block';
+            }
+        });
+    
+        // Function to display error message
+        function displayErrorMessage(message) {
+            document.getElementById('error-message').innerText = message;
+            document.getElementById('error-message').style.display = 'block';
+        }
+    
+        // Check if number of uploaded resumes match the specified number and if job description is provided
+        document.querySelector('form').addEventListener('submit', function(event) {
+            var numResumes = parseInt(document.getElementById('num_resumes').value);
+            var uploadedResumes = document.getElementById('resumes').files.length;
+            var jobInput = document.getElementById('job_input').value;
+            var jobDescription;
+            if (jobInput === 'paste') {
+                jobDescription = document.getElementById('job_description').value.trim();
+            } else if (jobInput === 'upload') {
+                jobDescription = document.getElementById('job_file').value.trim();
+            }
+    
+            if (uploadedResumes !== numResumes) {
+                displayErrorMessage('Number of uploaded resumes does not match the specified number.');
+                event.preventDefault(); // Prevent form submission
+            } else if (jobDescription === '') {
+                displayErrorMessage('Please provide the job description.');
+                event.preventDefault(); // Prevent form submission
+            }
+        });
+    </script>
+</body>
+</html>

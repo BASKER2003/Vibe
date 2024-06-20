@@ -1,0 +1,149 @@
+@font-face {
+    font-family: myFont2;
+    src: url(Book+Ends.ttf);
+}
+
+/* Footer Styles */
+#survey-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height:40px;
+    background-color: lightcyan;
+    color: black;
+}
+
+.container-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: lightcyan;
+    color: black;
+    height:50px;
+}
+
+.footer-logo .logo {
+    color: black;
+    text-decoration: none;
+    padding: 5px;
+    font-family: myFont2;
+    font-size: 50px;
+}
+
+.footer-social a {
+    color: black;
+    text-decoration: none;
+    margin-right: 10px;
+}
+
+.footer-copyright {
+    color: black;
+    font-size: 14px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Header Styles */
+#custom-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 50px; /* Adjust height as needed */
+    background-color: lightcyan;
+}
+
+.container-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0; /* Adjusted margin to remove left margin */
+    padding: 10px 20px; /* Adjust padding as needed */
+}
+
+.custom-navbar-header {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    margin-bottom: 40px; /* Adjust margin as needed */
+}
+
+.custom-navbar-brand {
+    font-size: 20px;
+    position: relative;
+    top: -30px; /* Adjusted top position to move the logo up */
+}
+
+.custom-main-menu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    margin-bottom: 50px;
+    margin-left: 40px;
+}
+
+.custom-main-menu li {
+    margin-left: 20px;
+}
+
+.custom-main-menu li:first-child {
+    margin-left: 0;
+}
+
+.custom-main-menu li a {
+    color: black;
+    text-decoration: none;
+    
+}
+
+.custom-main-menu li a:hover {
+    color: #CA2DBC;
+}
+
+.custom-dropdown {
+    position: relative;
+}
+
+.custom-dropdown-content {
+    display: none;
+    position: absolute;
+    backdrop-filter: blur(10px);
+    background-color: rgba(255, 255, 255, 0.5);
+    min-width: 160px;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.custom-dropdown-content a {
+    color: #000;
+    padding: 12px 16px;
+    display: block;
+    text-decoration: none;
+}
+
+.custom-dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+.custom-dropdown:hover .custom-dropdown-content {
+    display: block;
+}
+
+#custom-nav {
+    margin-left: auto;
+}
+
+.custom-logo {
+    font-family: myFont2;
+    font-size: 60px;
+    text-decoration: none;
+    color: black;
+    margin-top: -10px; /* Adjusted margin-top to move the logo up */
+
+    
+}

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link href="{{ url_for('static', filename='stylehf.css') }}" rel="stylesheet" media="all">    
+    <style>
+        
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url("{{ url_for('static', filename='b1.jpg') }}");
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 110px;
+        }
+
+        h1 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        p {
+            font-size: 20px;
+            line-height: 1.6;
+            color: #555;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table th,
+        table td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        table th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        table tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        table tbody tr:hover {
+            background-color: #e0e0e0;
+        }
+
+        .horizontal-line {
+            border-bottom: 1px solid #ccc;
+            /* You can adjust the color and thickness */
+            margin: 10px 0;
+            /* Adjust margin as needed */
+        }
+
+        .name {
+            text-align: center;
+            font-size: 40px;
+            color: white;
+            margin-top: 90px;
+        }
+
+        @media screen and (max-width: 768px) {
+            body {
+                background-image: url("{{ url_for('static', filename='b2.jpg') }}");
+                background-repeat: no-repeat;
+                background-size: cover;
+            }
+
+            .container {
+                width: 90%;
+            }
+        }
+
+        @media screen and (max-width: 1024px) {
+            body {
+                background-image: url("{{ url_for('static', filename='b2.jpg') }}");
+                background-repeat: no-repeat;
+                background-size: cover;
+            }
+
+            .container {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header id="custom-header">
+        <div class="container-nav">
+            <div class="custom-navbar-header">
+                <!-- Logo -->
+                <div class="custom-navbar-brand">
+                    <a class="custom-logo" href="http://localhost:80/Vibe/main.php">(VIBE)</a>
+                </div>
+                <!-- Navigation -->
+                <nav id="custom-nav">
+                    <ul class="custom-main-menu">
+                        <li><a href="http://localhost:80/Vibe/main.php">Home</a></li>
+                        <li class="custom-dropdown">
+                            <a class="custom-dropbtn" href="javascript:void(0)">Services <span>&#11167;</span></a>
+                            <div class="custom-dropdown-content">
+								<a href="http://127.0.0.1:5000">Career Prediction</a>
+								<a href="http://127.0.0.1:5001">Resume Analyzer</a>
+								<a href="http://localhost:80/Vibe/1-Job/index.php">Job Recommendations</a>
+								<a href="http://localhost:80/Vibe/1-Course/index.php">Course Recommendations</a>
+								<a href="http://localhost:80/Vibe/blog.php">Knowledge Network</a>
+                            </div>
+                        </li>
+                        <li><a href="http://localhost:80/Vibe/main.php#about">About Us</a></li>
+                        <li><a href="http://localhost:80/Vibe/contact.php">Contact Us</a></li>
+                        <li><a href="http://localhost:80/Vibe/logout.php">Log out</a></li>
+                    </ul>
+                </nav>
+                <!-- /Navigation -->
+            </div>
+        </div>
+    </header>
+
+    <h1 class="name">Your Score for your resume</h1>
+
+    <div class="container">
+        <h1>Scored Resumes</h1><br>
+        <div class="horizontal-line"></div>
+
+        
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Resume Name</th>
+                    <th>Score <i class="fa-light fa-hundred-points"></i></th>
+                    {% if scored_resumes|length > 1 %}
+                        <th>Rank</th>
+                    {% endif %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for resume in scored_resumes %}
+                    <tr>
+                        <td>{{ resume.resume_name }}</td>
+                        <td>{{ resume.score }}</td>
+                        {% if scored_resumes|length > 1 %}
+                            <td>{{ loop.index }}</td>
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <footer id="survey-footer" class="section">
+        <div class="container-footer">
+            <div class="row">
+                <div class="col-md-6 col-sm-12">
+                    <div class="footer-logo">
+                        <a class="logo" href="#">(VIBE)</a>
+                    </div>
+                </div>
+                <div class="col-md-4 col-md-offset-2 col-sm-12">
+                    <div class="footer-social">
+                        <!-- Add social media links or icons here -->
+                    </div>
+                </div>
+            </div>
+            <div id="survey-bottom-footer" class="row">
+                <div class="col-md-12 text-center">
+                    <div class="footer-copyright">
+                        <span>&copy; 2024. All Rights Reserved.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

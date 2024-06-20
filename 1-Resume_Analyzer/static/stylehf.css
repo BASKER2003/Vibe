@@ -1,0 +1,185 @@
+
+
+@font-face {
+    font-family: myFont2;
+    src: url(/static/Book+Ends.ttf);
+}
+
+
+.font2{
+    font-family: myFont2;
+    font-size: 80px;
+}
+
+
+
+#survey-footer {
+position:fixed;
+bottom: 0;
+left: 0;
+width: 100%;
+
+
+padding: 8px;
+height: 5vh;
+}
+
+.footer-logo .logo {
+color: white;
+text-decoration: none;
+padding: 5px;
+font-family: myFont2;
+font-size: 50px;
+}
+
+.footer-logo .logo:hover {
+color: #ff6600;
+}
+
+.footer-social a {
+color: white;
+text-decoration: none;
+margin-right: 10px;
+}
+
+.footer-social a:hover {
+color: #ff6600;
+}
+
+.footer-copyright span {
+color: white;
+font-size: 14px;
+}
+
+.container-footer {
+display: flex;
+justify-content: space-between;
+align-items: center;
+height: 100%;
+padding: 10px 20px;
+padding-bottom: 10px;
+margin-top: -5px;
+}
+
+@media (max-width: 768px) {
+.container {
+padding: 10px;
+}
+}
+
+@media (max-width: 768px) {
+.footer-logo {
+text-align: center;
+margin-bottom: 20px;
+}
+.footer-social {
+text-align: center;
+}
+.footer-copyright {
+text-align: center;
+}
+}
+
+
+
+
+
+
+
+
+
+
+#custom-header {
+position: fixed;
+top: -20px;
+width: 100%;
+
+z-index: 10;
+height: 20px;
+}
+
+.container-nav {
+display: flex;
+/* justify-content: space-between; */
+align-items: center;
+/* padding: 10px 20px;  */
+margin-top: 10px;
+}
+
+.custom-navbar-header {
+display: flex;
+align-items: center;
+width: 100%;
+max-width: 1200px; 
+margin: 0 auto; /* Center the content */
+margin-bottom: 80px;
+}
+
+.custom-navbar-brand {
+font-size: 20px;
+}
+
+.custom-main-menu {
+list-style: none;
+margin: 0;
+padding: 0;
+display: flex;
+}
+
+.custom-main-menu li {
+margin-left: 20px;
+}
+
+.custom-main-menu li:first-child {
+margin-left: 0;
+}
+
+.custom-main-menu li a {
+color: #fff;
+text-decoration: none;
+}
+
+.custom-main-menu li a:hover {
+color:#CA2DBC;
+}
+
+.custom-dropdown {
+position: relative;
+}
+
+.custom-dropdown-content {
+display: none;
+position: absolute;
+backdrop-filter: blur(10px); /* Adjust the blur intensity as needed */
+background-color: rgba(255, 255, 255, 0.5); /* Adjust the background color and opacity */
+min-width: 160px;
+box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+z-index: 1;
+}
+
+.custom-dropdown-content a {
+color: #000;
+padding: 12px 16px;
+display: block;
+text-decoration: none;
+}
+
+.custom-dropdown-content a:hover {
+background-color: #f1f1f1;
+}
+
+.custom-dropdown:hover .custom-dropdown-content {
+display: block;
+}
+
+#custom-nav {
+margin-left: auto; /* Pushes the navigation to the right */
+}
+
+.custom-logo {
+font-family: myFont2;
+font-size: 50px;
+text-decoration: none;
+color: #f1f1f1;
+}
+
