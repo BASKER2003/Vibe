@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" >
+  <style>
+    @font-face {
+        font-family: myFont2;
+        src: url(static/fonts/Book+Ends.ttf);
+    }
+
+    .custom-logo {
+        font-family: myFont2;
+        font-size: 80px;
+        text-decoration: none;
+        color: #FFFFFF; /* Adjust this to your desired text color */
+    }
+  </style>
+  <text class="custom-logo">(VIBE)</text>
+</svg>

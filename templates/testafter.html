@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Intelligent Career Guidance System</title>
+<link href="{{ url_for('static', filename='css/styletestafter.css') }}" rel="stylesheet" media="all">
+</head>
+<body>
+
+<header id="custom-header">
+    <div class="container-nav">
+        <div class="custom-navbar-header">
+            <!-- Logo -->
+            <div class="custom-navbar-brand">
+                <a class="custom-logo" href="http://localhost:80/Vibe/main.php">(VIBE)</a>
+            </div>
+            <!-- Navigation -->
+            <nav id="custom-nav">
+                <ul class="custom-main-menu">
+                    <li><a href="http://localhost:80/Vibe/main.php">Home</a></li>
+                    <li class="custom-dropdown">
+                        <a class="custom-dropbtn" href="javascript:void(0)">Services <span>&#11167;</span></a>
+                        <div class="custom-dropdown-content">
+                            <a href="http://127.0.0.1:5000">Career Prediction</a>
+                            <a href="http://127.0.0.1:5001">Resume Analyzer</a>
+                            <a href="http://localhost:80/Vibe/1-Job/index.php">Job Recommendations</a>
+                            <a href="http://localhost:80/Vibe/1-Course/index.php">Course Recommendations</a>
+                            <a href="http://localhost:80/Vibe/blog.php">Knowledge Network</a>
+                        </div>
+                    </li>
+                    <li><a href="http://localhost:80/Vibe/main.php#about">About Us</a></li>
+                    <li><a href="http://localhost:80/Vibe/contact.php">Contact Us</a></li>
+                    <li><a href="http://localhost:80/Vibe/logout.php">Log out</a></li>
+                </ul>
+            </nav>
+            <!-- /Navigation -->
+        </div>
+    </div>
+</header>
+
+<div class="container">
+    <div class="f1"><h1>Hey! The top job roles that matched your skills.....</h1></div>
+    <div class="graph-cont">
+        <h1>You can be a great:</h1>
+        <div class="bar bar1"><a href="http://localhost:80/Vibe/blog.php">{{ job0 }}</a></div>
+        <i><h2><p><a href="http://localhost:80/Vibe/blog.php">To know more about these job roles click here!</a></p></h2></i>
+    </div>
+</div>
+
+<footer id="survey-footer" class="section">
+    <div class="container-footer">
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <div class="footer-logo">
+                    <a class="logo" href="http://localhost:80/Vibe/main.php">(VIBE)</a>
+                </div>
+            </div>
+            <div class="col-md-4 col-md-offset-2 col-sm-12">
+                <div class="footer-social">
+                    <!-- Add social media links or icons here -->
+                </div>
+            </div>
+        </div>
+        <div id="survey-bottom-footer" class="row">
+            <div class="col-md-12 text-center">
+                <div class="footer-copyright">
+                    <span>&copy; 2024. All Rights Reserved.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>
+

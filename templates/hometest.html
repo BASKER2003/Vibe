@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rate Yourself</title>
+    <link href="{{ url_for('static', filename='css/stylehometest.css') }}" rel="stylesheet" media="all">
+</head>
+<body>
+    <header id="custom-header">
+        <div class="container">
+            <div class="custom-navbar-header">
+                <!-- Logo -->
+                <div class="custom-navbar-brand">
+                    <a class="custom-logo" href="http://localhost:80/Vibe/main.php">(VIBE)</a>
+                </div>
+
+                <?php
+					// Check if the user is logged in, if not then redirect him to login page
+					if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true):
+				?>
+
+				<!-- Navigation -->
+				
+				<?php else: ?>
+                <!-- Navigation -->
+                <nav id="custom-nav">
+                    <ul class="custom-main-menu">
+                        <li><a href="http://localhost:80/Vibe/main.php">Home</a></li>
+                        <li class="custom-dropdown">
+                            <a class="custom-dropbtn" href="javascript:void(0)">Services <span>&#11167;</span></a>
+                            <div class="custom-dropdown-content">
+								<a href="http://127.0.0.1:5000">Career Prediction</a>
+								<a href="http://127.0.0.1:5001">Resume Analyzer</a>
+								<a href="http://localhost:80/Vibe/1-Job/index.php">Job Recommendations</a>
+								<a href="http://localhost:80/Vibe/1-Course/index.php">Course Recommendations</a>
+								<a href="http://localhost:80/Vibe/blog.php">Knowledge Network</a>
+                            </div>
+                        </li>
+                        <li><a href="http://localhost:80/Vibe/main.php#about">About Us</a></li>
+                        <li><a href="http://localhost:80/Vibe/contact.php">Contact Us</a></li>
+                        <li><a href="http://localhost:80/Vibe/logout.php">Log out</a></li>
+                    </ul>
+                </nav>
+                <!-- /Navigation -->
+                <?php endif ?>
+            </div>
+        </div>
+    </header>
+    
+    
+    
+    <div class="over">
+    <div class="form-container">
+        <div class="font1">
+        <h2>[RATE_YOURSELF]</h2>
+    </div>
+
+    <div class="course-dropdown" id="course-dropdown" style="display: block;">
+        <label for="course">Course:</label>
+        <select name="course" id="course">
+            <option value="Aeronautical">Aeronautical</option>
+            <option value="Aerospace">Aerospace</option>
+            <option value="AIDS">AIDS</option>
+            <option value="Automobile">Automobile</option>
+            <option value="Civil">Civil</option>
+            <option value="CSE">CSE</option>
+            <option value="Cybersecurity">Cybersecurity</option>
+            <option value="ECE">ECE</option>
+            <option value="EEE">EEE</option>
+            <option value="FT">FT</option>
+            <option value="IT">IT</option>
+            <option value="Mechanical">Mechanical</option>
+            <option value="Mechatronics">Mechatronics</option>
+        </select>
+        <button onclick="submitCourse()">Submit</button>
+    </div>
+
+    <div id="questions-container" style="display: none;">
+        <!-- Your questions HTML code goes here -->
+        <form id="myForm" method="POST" action="{{url_for('result')}}">
+            
+            <div class="question question1">
+                <label id="l1">1) Database Fundamentals</label>
+                <ul class="options">
+                    <li><button type="button" class="option-button" onclick="selectOption(this,1)">Not Interested</button></li>
+                    <li><button type="button" class="option-button" onclick="selectOption(this,2)">Poor</button></li>
+                    <li><button type="button" class="option-button" onclick="selectOption(this,3)">Beginner</button></li>
+                    <li><button type="button" class="option-button" onclick="selectOption(this,5)">Average</button></li>
+                    <li><button type="button" class="option-button" onclick="selectOption(this,6)">Intermediate</button></li>
+                    <li><button type="button" class="option-button" onclick="selectOption(this,7)">Excellent</button></li>
+                    <li><button type="button" class="option-button" onclick="selectOption(this,9)">Professional</button></li>
+                </ul>
+                <input type="hidden" name="selected_option_question1" value="">
+                <div class="button-group button-group1">
+                    <button type="button" onclick="showQuestion(2)">Next</button>
+                </div>
+            </div>
+            
+            <div class="question question2" style="display: none;">
+                <label id="l2">2) Computer Architecture</label>
+                <ul class="options">
+                    <li><button type="button" class="option-button" onclick="selectOption(this,1)">Not Interested</button></li>
+                    <li><button type="button" class="option-button" onclick="selectOption(this,2)">Poor</button></li>
+                    <li><button type="button" class="option-button" onclick="selectOption(this,3)">Beginner</button></li>
+                    <li><button type="button" class="option-button" onclick="selectOption(this,5)">Average</button></li>
+                    <li><button type="button" class="option-button" onclick="selectOption(this,6)">Intermediate</button></li>
+                    <li><button type="button" class="option-button" onclick="selectOption(this,7)">Excellent</button></li>
+                    <li><button type="button" class="option-button" onclick="selectOption(this,9)">Professional</button></li>
+                </ul>
+                <input type="hidden" name="selected_option_question2" value="">
+                <div class="button-group button-group2">
+                    <button type="button" onclick="showQuestion(1)">Back</button>
+                    <button type="button" onclick="showQuestion(3)">Next</button>
+                </div>
+            </div>
+            
+            <!-- Repeat for other questions -->
+            <!-- Adjust question number, label text, input name, and button group number accordingly -->
+            
+            <div class="question question3" style="display: none;">
+                <label id="l3">3) Distributed Computing Systems</label>
+                <ul class="options">
+                    <li><button type="button" class="option-button" onclick="selectOption(this,1)">Not Interested</button></li>
+                    <li><button type="button" class="option-button" onclick="selectOption(this,2)">Poor</button></li>
+                    <li><button type="button" class="option-button" onclick="selectOption(this,3)">Beginner</button></li>
+                    <li><button type="button" class="option-button" onclick="selectOption(this,5)">Average</button></li>
+                    <li><button type="button" class="option-button" onclick="selectOption(this,6)">Intermediate</button></li>
+                    <li><button type="button" class="option-button" onclick="selectOption(this,7)">Excellent</button></li>
+                    <li><button type="button" class="option-button" onclick="selectOption(this,9)">Professional</button></li>
+                </ul>
+                <input type="hidden" name="selected_option_question3" value="">
+                <div class="button-group button-group3">
+                    <button type="button" onclick="showQuestion(2)">Back</button>
+                    <button type="button" onclick="showQuestion(4)">Next</button>
+                </div>
+            </div>
+            
+            <!-- Repeat for remaining questions -->
+            
+            <div class="question question4" style="display: none;">
+                <label id="l4">4) Cyber Security</label>
+                <ul class="options">
+                    <li><button type="button" class="option-button" onclick="selectOption(this,1)">Not Interested</button></li>
+                    <li><button type="button" class="option-button" onclick="selectOption(this,2)">Poor</button></li>
+                    <li><button type="button" class="option-button" onclick="selectOption(this,3)">Beginner</button></li>
+                    <li><button type="button" class="option-button" onclick="selectOption(this,5)">Average</button></li>
+                    <li><button type="button" class="option-button" onclick="selectOption(this,6)">Intermediate</button></li>
+                    <li><button type="button" class="option-button" onclick="selectOption(this,7)">Excellent</button></li>
+                    <li><button type="button" class="option-button" onclick="selectOption(this,9)">Professional</button></li>
+                </ul>
+                <input type="hidden" name="selected_option_question4" value="">
+                <div class="button-group button-group4">
+                    <button type="button" onclick="showQuestion(3)">Back</button>
+                    <button type="button" onclick="showQuestion(5)">Next</button>
+                </div>
+            </div>
+            
+            <!-- Repeat for remaining questions -->
+            
+            <div class="question question5" style="display: none;">
+                <label id="l5">5) Computer Networking</label>
+                <ul class="options">
+                    <li><button type="button" class="option-button" onclick="selectOption(this,1)">Not Interested</button></li>
+                    <li><button type="button" class="option-button" onclick="selectOption(this,2)">Poor</button></li>
+                    <li><button type="button" class="option-button" onclick="selectOption(this,3)">Beginner</button></li>
+                    <li><button type="button" class="option-button" onclick="selectOption(this,5)">Average</button></li>
+                    <li><button type="button" class="option-button" onclick="selectOption(this,6)">Intermediate</button></li>
+                    <li><button type="button" class="option-button" onclick="selectOption(this,7)">Excellent</button></li>
+                    <li><button type="button" class="option-button" onclick="selectOption(this,9)">Professional</button></li>
+                </ul>
+                <input type="hidden" name="selected_option_question5" value="">
+                <div class="button-group button-group5">
+                    <button type="button" onclick="showQuestion(4)">Back</button>
+                    <button type="button" onclick="showQuestion(6)">Next</button>
+                </div>
+            </div>
+            
+            <!-- Repeat for remaining questions -->
+            
+            <div class="question question6" style="display: none;">
+                <label id="l6">6) Software Development</label>
+                <ul class="options">
+                    <li><button type="button" class="option-button" onclick="selectOption(this,1)">Not Interested</button></li>
+                    <li><button type="button" class="option-button" onclick="selectOption(this,2)">Poor</button></li>
+                    <li><button type="button" class="option-button" onclick="selectOption(this,3)">Beginner</button></li>
+                    <li><button type="button" class="option-button" onclick="selectOption(this,5)">Average</button></li>
+                    <li><button type="button" class="option-button" onclick="selectOption(this,6)">Intermediate</button></li>
+                    <li><button type="button" class="option-button" onclick="selectOption(this,7)">Excellent</button></li>
+                    <li><button type="button" class="option-button" onclick="selectOption(this,9)">Professional</button></li>
+                </ul>
+                <input type="hidden" name="selected_option_question6" value="">
+                <div class="button-group button-group6">
+                    <button type="button" onclick="showQuestion(5)">Back</button>
+                    <button type="button" onclick="showQuestion(7)">Next</button>
+                </div>
+            </div>
+            
+            <!-- Repeat for remaining questions -->
+            
+            <div class="question question7" style="display: none;">
+                <label id="l7">7) Programming Skills</label>
+                <ul class="options">
+                    <li><button type="button" class="option-button" onclick="selectOption(this,1)">Not Interested</button></li>
+                    <li><button type="button" class="option-button" onclick="selectOption(this,2)">Poor</button></li>
+                    <li><button type="button" class="option-button" onclick="selectOption(this,3)">Beginner</button></li>
+                    <li><button type="button" class="option-button" onclick="selectOption(this,5)">Average</button></li>
+                    <li><button type="button" class="option-button" onclick="selectOption(this,6)">Intermediate</button></li>
+                    <li><button type="button" class="option-button" onclick="selectOption(this,7)">Excellent</button></li>
+                    <li><button type="button" class="option-button" onclick="selectOption(this,9)">Professional</button></li>
+                </ul>
+                <input type="hidden" name="selected_option_question7" value="">
+                <div class="button-group button-group7">
+                    <button type="button" onclick="showQuestion(6)">Back</button>
+                    <button type="button" onclick="showQuestion(8)">Next</button>
+                </div>
+            </div>
+            
+            <!-- Repeat for remaining questions -->
+            
+            <div class="question question8" style="display: none;">
+                <label id="l8">8) Project Management</label>
+                <ul class="options">
+                    <li><button type="button" class="option-button" onclick="selectOption(this,1)">Not Interested</button></li>
+                    <li><button type="button" class="option-button" onclick="selectOption(this,2)">Poor</button></li>
+                    <li><button type="button" class="option-button" onclick="selectOption(this,3)">Beginner</button></li>
+                    <li><button type="button" class="option-button" onclick="selectOption(this,5)">Average</button></li>
+                    <li><button type="button" class="option-button" onclick="selectOption(this,6)">Intermediate</button></li>
+                    <li><button type="button" class="option-button" onclick="selectOption(this,7)">Excellent</button></li>
+                    <li><button type="button" class="option-button" onclick="selectOption(this,9)">Professional</button></li>
+                </ul>
+                <input type="hidden" name="selected_option_question8" value="">
+                <div class="button-group button-group8">
+                    <button type="button" onclick="showQuestion(7)">Back</button>
+                    <button type="button" onclick="showQuestion(9)">Next</button>
+                </div>
+            </div>
+            
+            <!-- Repeat for remaining questions -->
+            
+            <div class="question question9" style="display: none;">
+                <label id="l9">9) Computer Forensics Fundamentals</label>
+                <ul class="options">
+                    <li><button type="button" class="option-button" onclick="selectOption(this,1)">Not Interested</button></li>
+                    <li><button type="button" class="option-button" onclick="selectOption(this,2)">Poor</button></li>
+                    <li><button type="button" class="option-button" onclick="selectOption(this,3)">Beginner</button></li>
+                    <li><button type="button" class="option-button" onclick="selectOption(this,5)">Average</button></li>
+                    <li><button type="button" class="option-button" onclick="selectOption(this,6)">Intermediate</button></li>
+                    <li><button type="button" class="option-button" onclick="selectOption(this,7)">Excellent</button></li>
+                    <li><button type="button" class="option-button" onclick="selectOption(this,9)">Professional</button></li>
+                </ul>
+                <input type="hidden" name="selected_option_question9" value="">
+                <div class="button-group button-group9">
+                    <button type="button" onclick="showQuestion(8)">Back</button>
+                    <button type="button" onclick="showQuestion(10)">Next</button>
+                </div>
+            </div>
+            
+            <!-- Repeat for remaining questions -->
+            
+            <div class="question question10" style="display: none;">
+                <label id="l10">10) Technical Communication skills</label>
+                <ul class="options">
+                    <li><button type="button" class="option-button" onclick="selectOption(this,1)">Not Interested</button></li>
+                    <li><button type="button" class="option-button" onclick="selectOption(this,2)">Poor</button></li>
+                    <li><button type="button" class="option-button" onclick="selectOption(this,3)">Beginner</button></li>
+                    <li><button type="button" class="option-button" onclick="selectOption(this,5)">Average</button></li>
+                    <li><button type="button" class="option-button" onclick="selectOption(this,6)">Intermediate</button></li>
+                    <li><button type="button" class="option-button" onclick="selectOption(this,7)">Excellent</button></li>
+                    <li><button type="button" class="option-button" onclick="selectOption(this,9)">Professional</button></li>
+                </ul>
+                <input type="hidden" name="selected_option_question10" value="">
+                <div class="button-group button-group10">
+                    <button type="button" onclick="showQuestion(9)">Back</button>
+                    <button type="button" onclick="showQuestion(11)">Next</button>
+                </div>
+            </div>
+            
+            <!-- Repeat for remaining questions -->
+            
+            <div class="question question11" style="display: none;">
+                <label id="l11">11) AI ML</label>
+                <ul class="options">
+                    <li><button type="button" class="option-button" onclick="selectOption(this,1)">Not Interested</button></li>
+                    <li><button type="button" class="option-button" onclick="selectOption(this,2)">Poor</button></li>
+                    <li><button type="button" class="option-button" onclick="selectOption(this,3)">Beginner</button></li>
+                    <li><button type="button" class="option-button" onclick="selectOption(this,5)">Average</button></li>
+                    <li><button type="button" class="option-button" onclick="selectOption(this,6)">Intermediate</button></li>
+                    <li><button type="button" class="option-button" onclick="selectOption(this,7)">Excellent</button></li>
+                    <li><button type="button" class="option-button" onclick="selectOption(this,9)">Professional</button></li>
+                </ul>
+                <input type="hidden" name="selected_option_question11" value="">
+                <div class="button-group button-group11">
+                    <button type="button" onclick="showQuestion(10)">Back</button>
+                    <button type="button" onclick="showQuestion(12)">Next</button>
+                </div>
+            </div>
+            
+            <!-- Repeat for remaining questions -->
+            
+            <div class="question question12" style="display: none;">
+                <label id="l12">12) Software Engineering</label>
+                <ul class="options">
+                    <li><button type="button" class="option-button" onclick="selectOption(this,1)">Not Interested</button></li>
+                    <li><button type="button" class="option-button" onclick="selectOption(this,2)">Poor</button></li>
+                    <li><button type="button" class="option-button" onclick="selectOption(this,3)">Beginner</button></li>
+                    <li><button type="button" class="option-button" onclick="selectOption(this,5)">Average</button></li>
+                    <li><button type="button" class="option-button" onclick="selectOption(this,6)">Intermediate</button></li>
+                    <li><button type="button" class="option-button" onclick="selectOption(this,7)">Excellent</button></li>
+                    <li><button type="button" class="option-button" onclick="selectOption(this,9)">Professional</button></li>
+                </ul>
+                <input type="hidden" name="selected_option_question12" value="">
+                <div class="button-group button-group12">
+                    <button type="button" onclick="showQuestion(11)">Back</button>
+                    <button type="button" onclick="showQuestion(13)">Next</button>
+                </div>
+            </div>
+            
+            <!-- Repeat for remaining questions -->
+            
+            <div class="question question13" style="display: none;">
+                <label id="l13">13) Business Analysis</label>
+                <ul class="options">
+                    <li><button type="button" class="option-button" onclick="selectOption(this,1)">Not Interested</button></li>
+                    <li><button type="button" class="option-button" onclick="selectOption(this,2)">Poor</button></li>
+                    <li><button type="button" class="option-button" onclick="selectOption(this,3)">Beginner</button></li>
+                    <li><button type="button" class="option-button" onclick="selectOption(this,5)">Average</button></li>
+                    <li><button type="button" class="option-button" onclick="selectOption(this,6)">Intermediate</button></li>
+                    <li><button type="button" class="option-button" onclick="selectOption(this,7)">Excellent</button></li>
+                    <li><button type="button" class="option-button" onclick="selectOption(this,9)">Professional</button></li>
+                </ul>
+                <input type="hidden" name="selected_option_question13" value="">
+                <div class="button-group button-group13">
+                    <button type="button" onclick="showQuestion(12)">Back</button>
+                    <button type="button" onclick="showQuestion(14)">Next</button>
+                </div>
+            </div>
+            
+            <!-- Repeat for remaining questions -->
+            
+            <div class="question question14" style="display: none;">
+                <label id="l14">14) Communication skills</label>
+                <ul class="options">
+                    <li><button type="button" class="option-button" onclick="selectOption(this,1)">Not Interested</button></li>
+                    <li><button type="button" class="option-button" onclick="selectOption(this,2)">Poor</button></li>
+                    <li><button type="button" class="option-button" onclick="selectOption(this,3)">Beginner</button></li>
+                    <li><button type="button" class="option-button" onclick="selectOption(this,5)">Average</button></li>
+                    <li><button type="button" class="option-button" onclick="selectOption(this,6)">Intermediate</button></li>
+                    <li><button type="button" class="option-button" onclick="selectOption(this,7)">Excellent</button></li>
+                    <li><button type="button" class="option-button" onclick="selectOption(this,9)">Professional</button></li>
+                </ul>
+                <input type="hidden" name="selected_option_question14" value="">
+                <div class="button-group button-group14">
+                    <button type="button" onclick="showQuestion(13)">Back</button>
+                    <button type="button" onclick="showQuestion(15)">Next</button>
+                </div>
+            </div>
+            
+            <!-- Repeat for remaining questions -->
+            
+            <div class="question question15" style="display: none;">
+                <label id="l15">15) Data Science</label>
+                <ul class="options">
+                    <li><button type="button" class="option-button" onclick="selectOption(this,1)">Not Interested</button></li>
+                    <li><button type="button" class="option-button" onclick="selectOption(this,2)">Poor</button></li>
+                    <li><button type="button" class="option-button" onclick="selectOption(this,3)">Beginner</button></li>
+                    <li><button type="button" class="option-button" onclick="selectOption(this,5)">Average</button></li>
+                    <li><button type="button" class="option-button" onclick="selectOption(this,6)">Intermediate</button></li>
+                    <li><button type="button" class="option-button" onclick="selectOption(this,7)">Excellent</button></li>
+                    <li><button type="button" class="option-button" onclick="selectOption(this,9)">Professional</button></li>
+                </ul>
+                <input type="hidden" name="selected_option_question15" value="">
+                <div class="button-group button-group15">
+                    <button type="button" onclick="showQuestion(14)">Back</button>
+                    <button type="button" onclick="showQuestion(16)">Next</button>
+                </div>
+            </div>
+
+            <div class="question question16" style="display: none;">
+                <label id="l16">16) Troubleshooting Skills</label>
+                <ul class="options">
+                    <li><button type="button" class="option-button" onclick="selectOption(this,1)">Not Interested</button></li>
+                    <li><button type="button" class="option-button" onclick="selectOption(this,2)">Poor</button></li>
+                    <li><button type="button" class="option-button" onclick="selectOption(this,3)">Beginner</button></li>
+                    <li><button type="button" class="option-button" onclick="selectOption(this,5)">Average</button></li>
+                    <li><button type="button" class="option-button" onclick="selectOption(this,6)">Intermediate</button></li>
+                    <li><button type="button" class="option-button" onclick="selectOption(this,7)">Excellent</button></li>
+                    <li><button type="button" class="option-button" onclick="selectOption(this,9)">Professional</button></li>
+                </ul>
+                <input type="hidden" name="selected_option_question16" value="">
+                <div class="button-group button-group16">
+                    <button type="button" onclick="showQuestion(15)">Back</button>
+                    <button type="button" onclick="showQuestion(17)">Next</button>
+                </div>
+            </div>
+            
+            <div class="question question17" style="display: none;">
+                <label id="l17">17) Graphics Designing</label>
+                <ul class="options">
+                    <li><button type="button" class="option-button" onclick="selectOption(this,1)">Not Interested</button></li>
+                    <li><button type="button" class="option-button" onclick="selectOption(this,2)">Poor</button></li>
+                    <li><button type="button" class="option-button" onclick="selectOption(this,3)">Beginner</button></li>
+                    <li><button type="button" class="option-button" onclick="selectOption(this,5)">Average</button></li>
+                    <li><button type="button" class="option-button" onclick="selectOption(this,6)">Intermediate</button></li>
+                    <li><button type="button" class="option-button" onclick="selectOption(this,7)">Excellent</button></li>
+                    <li><button type="button" class="option-button" onclick="selectOption(this,9)">Professional</button></li>
+                </ul>
+                <input type="hidden" name="selected_option_question17" value="">
+                <div class="button-group button-group17">
+                    <button type="button" onclick="showQuestion(16)">Back</button>
+                    <button type="submit" onclick="return validateForm()">Submit</button>
+
+                </div>
+            </div>
+            
+        </form>
+        </div>
+    </div>
+</div>
+
+<footer id="survey-footer" class="section">
+    <!-- container -->
+    <div class="container-footer">
+        <!-- row -->
+        <div class="row">
+            <!-- footer logo -->
+            <div class="col-md-6 col-sm-12">
+                <div class="footer-logo">
+                    
+                    <a class="logo" href="http://localhost:80/Vibe/main.php">(VIBE)</a>
+                    
+                </div>
+            </div>
+            <!-- /footer logo -->
+            <!-- social -->
+            <div class="col-md-4 col-md-offset-2 col-sm-12">
+                <div class="footer-social">
+                    <!-- Add social media links or icons here -->
+                </div>
+            </div>
+            <!-- /social -->
+        </div>
+        <!-- /row -->
+        <!-- row -->
+        <div id="survey-bottom-footer" class="row">
+            <!-- copyright -->
+            <div class="col-md-12 text-center">
+                <div class="footer-copyright">
+                    <span>&copy; 2024. All Rights Reserved.</span>
+                </div>
+            </div>
+            <!-- /copyright -->
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</footer>
+<!-- /Footer -->
+
+<script>
+    var selectedCourse;
+
+    function showQuestion(questionNumber) {
+        // Hide all questions
+        document.querySelectorAll('.question').forEach(function(question) {
+            question.style.display = 'none';
+        });
+
+        // Show the selected question
+        document.querySelector('.question' + questionNumber).style.display = 'block';
+    }
+
+    function selectOption(button, value) {
+        // Set the selected numerical value as the value of the hidden input field
+        button.closest('.question').querySelector('input[type="hidden"]').value = value;
+
+        // Optional: Highlight the selected option
+        var options = button.closest('.options').querySelectorAll('button');
+        options.forEach(function(option) {
+            option.classList.remove('selected');
+        });
+        button.classList.add('selected');
+    }
+
+    function validateForm() {
+        var alertShown = false; // Track whether the alert has been shown
+        var questions = document.querySelectorAll('.question');
+        var isValid = true;
+
+        questions.forEach(function(question) {
+            var selectedOption = question.querySelector('input[type="hidden"]').value;
+            if (!selectedOption && !alertShown) {
+                isValid = false;
+                alert("Please answer all questions before submitting.");
+                alertShown = true; // Set the flag to true to indicate the alert has been shown
+                return; // Stop further iteration
+            }
+        });
+
+        return isValid; // Return the validation result
+    }
+
+    // Add event listener to the form submission
+    document.querySelector('form').addEventListener('submit', function(event) {
+        // Validate the form
+        if (!validateForm()) {
+            // Prevent form submission if not valid
+            event.preventDefault();
+        }
+    });
+
+    function setLabelText(selectedCourse) {
+        var labelsMap = {
+            "Aerospace": [
+                "Spacecraft Systems",
+                "Thermodynamics",
+                "Fluid Dynamics",
+                "Propulsion Systems",
+                "Control Systems",
+                "Materials Science",
+                "Avionics",
+                "CAD/CAM",
+                "Structural Analysis",
+                "Instrumentation",
+                "Electrical Systems",
+                "Flight Dynamics",
+                "Manufacturing Processes",
+                "Spacecraft Propulsion",
+                "Spacecraft Guidance and Navigation",
+                "Spacecraft Structural Design",
+                "Project Management"
+            ],
+            "Aeronautical": [
+                "Aerodynamics",
+                "Structural Analysis",
+                "Propulsion Systems",
+                "Fluid Dynamics",
+                "Aircraft Design",
+                "Avionics",
+                "Materials Science",
+                "Control Systems",
+                "Manufacturing Processes",
+                "Instrumentation",
+                "CAD/CAM",
+                "Flight Dynamics",
+                "Electrical Systems",
+                "Thermodynamics",
+                "Environmental Control Systems",
+                "Testing and Evaluation",
+                "Project Management"
+            ],
+            "AIDS": [
+                "AI Ethics",
+                "AI Research",
+                "Big Data",
+                "Business Intelligence",
+                "Computer Vision",
+                "Data Analytics",
+                "Data Engineering",
+                "Data Science",
+                "Data Visualization",
+                "Database Management",
+                "Machine Learning",
+                "Machine Learning Operations (MLOps)",
+                "Natural Language Processing (NLP)",
+                "Predictive Analytics",
+                "Reinforcement Learning",
+                "Robotics",
+                "Speech Recognition",
+            ],
+            "Automobile": [
+                "Alternative Propulsion Technologies",
+                "Instrumentation and Control in Automobiles",
+                "CAD/CAM",
+                "Electrical Systems in Vehicles",
+                "Automotive Electronics",
+                "Fluid Mechanics in Automotive Systems",
+                "Vehicle Guidance and Navigation Systems",
+                "Materials in Automotive Engineering",
+                "Project Management in Automobile Engineering",
+                "Automotive Manufacturing Processes",
+                "Structural Analysis in Automotive Engineering",
+                "Automotive Structural Design",
+                "Internal Combustion Engines",
+                "Automotive Propulsion Systems",
+                "Automotive Thermodynamics",
+                "Vehicle Dynamics and Control",
+                "Automotive Safety Engineering",
+            ],
+            "Civil": [
+                "Bridge Engineering",
+                "Project Management in Civil Engineering",
+                "Coastal Engineering",
+                "Construction Materials Engineering",
+                "Construction Management",
+                "Environmental Engineering",
+                "Geotechnical Engineering",
+                "Surveying and Geomatics",
+                "Materials Engineering",
+                "Pavement Engineering",
+                "Earthquake Engineering",
+                "Structural Engineering",
+                "Transportation Engineering",
+                "Tunnel Engineering",
+                "Urban and Regional Planning",
+                "Water Resources Engineering",
+                "Water Chemistry",
+            ],
+            "Cybersecurity": [
+                "Application Security",
+                "Cryptography",
+                "Cybersecurity",
+                "Training and Education",
+                "Identity and Access Management (IAM)",
+                "Incident Response",
+                "Network Security",
+                "Penetration Testing",
+                "Security Analysis",
+                "Security Architecture",
+                "Security Compliance",
+                "Security Consulting",
+                "Training and Education",
+                "Security Governance",
+                "Security Operations Center (SOC)",
+                "Threat Intelligence",
+                "Vulnerability Management"
+            ],
+            "CSE": [
+                "Artificial Intelligence",
+                "Algorithms and Data Structures",
+                "Big Data",
+                "Blockchain Technology",
+                "Cloud Computing",
+                "Computer Vision",
+                "Database Management Systems",
+                "DevOps",
+                "Distributed Systems",
+                "Cybersecurity",
+                "Web Development",
+                "Game Development",
+                "Computer Vision",
+                "Internet of Things (IoT)",
+                "Machine Learning",
+                "Mobile App Development",
+                "Networks and Communication",
+            ],
+            "ECE": [
+                "Analog Electronics",
+                "Antenna Design",
+                "Communication Systems",
+                "Control Systems",
+                "Digital Electronics",
+                "Digital Signal Processing (DSP)",
+                "Embedded Systems",
+                "Fiber Optic Communication",
+                "Microelectronics",
+                "Networking",
+                "Optical Communication",
+                "Power Electronics",
+                "RF (Radio Frequency) Engineering",
+                "Satellite Communication",
+                "Telecommunications",
+                "VLSI (Very Large Scale Integration) Design",
+                "Wireless Communication"
+            ],
+            "EEE": [
+                "Circuit Design",
+                "Automation and Control",
+                "Communication Systems",
+                "Control Systems",
+                "Digital Systems Design",
+                "Digital Signal Processing (DSP)",
+                "Electromagnetics",
+                "Electronic Hardware Design",
+                "Embedded Systems",
+                "Instrumentation and Measurement",
+                "Microelectronics",
+                "Power Electronics",
+                "Power Systems",
+                "Renewable Energy Systems",
+                "RF (Radio Frequency) Engineering",
+                "Robotics",
+                "VLSI (Very Large Scale Integration) Design"
+            ],
+            "FT": [
+                "CAD for Fashion",
+                "Apparel Design",
+                "Fashion Illustration",
+                "Fashion Marketing",
+                "Fashion Merchandising",
+                "Fashion Product Management",
+                "Fashion Styling",
+                "Fashion Technology Project Management",
+                "Garment Construction",
+                "Pattern Making",
+                "Fashion Product Management",
+                "Quality Control in Fashion",
+                "Fashion Retail Management",
+                "Fashion Sustainability",
+                "Textile Science",
+                "Textile Technology",
+                "Trend Analysis"
+            ],
+            "Mechanical": [
+                "Aerospace Structural Design",
+                "Automotive Systems",
+                "CAD/CAM (Computer-Aided Design/Computer-Aided Manufacturing)",
+                "Fluid Dynamics",
+                "Control Systems",
+                "Electrical Systems",
+                "HVAC Systems",
+                "Instrumentation",
+                "Machine Learning in Manufacturing",
+                "Manufacturing Processes",
+                "Robotics in Manufacturing",
+                "Materials Science",
+                "System Integration",
+                "Propulsion Systems",
+                "Manufacturing Processes",
+                "Renewable Energy Systems",
+                "Structural Analysis"
+            ],
+            "Mechatronics": [
+                "Control Systems Integration",
+                "Control Systems Integration",
+                "Real-time Systems",
+                "Data Acquisition",
+                "Embedded Systems",
+                "Fault Diagnosis",
+                "Human-Machine Interaction",
+                "Industrial Automation",
+                "Machine Vision",
+                "Project Management",
+                "Mechatronic System Design",
+                "Mechatronic System Design",
+                "Mechatronic System Design",
+                "Real-time Systems",
+                "Robotic Manipulation",
+                "Robotics Systems Integration",
+                "Sensor and Actuator"
+            ],
+        };
+
+        var labels = labelsMap[selectedCourse];
+
+        if (labels) {
+            for (var i = 0; i < labels.length; i++) {
+                var labelId = "l" + (i + 1);
+                document.getElementById(labelId).textContent = (i + 1) + ") " + labels[i];
+            }
+        }
+    }
+
+    function submitCourse() {
+        selectedCourse = document.getElementById('course').value;
+        if (selectedCourse !== '') {
+
+
+            var xhr = new XMLHttpRequest();
+
+            // Configure the request
+            xhr.open('POST', '/', true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+
+            // Define what happens on successful data submission
+            xhr.onload = function () {
+                if (xhr.status >= 200 && xhr.status < 300) {
+                    console.log('Request successful');
+                    // Handle response here if needed
+                } else {
+                    console.error('Request failed');
+                    // Handle error here if needed
+                }
+            };
+
+            // Define what happens in case of an error
+            xhr.onerror = function () {
+                console.error('Request failed');
+                // Handle error here if needed
+            };
+
+            // Convert the data to JSON format
+            var data = JSON.stringify({ course: selectedCourse });
+
+            // Send the request
+            xhr.send(data);
+
+            document.getElementById('course-dropdown').style.display = 'none';
+            // Call function to set label text
+            setLabelText(selectedCourse);
+            document.getElementById('questions-container').style.display = 'block';
+        } else {
+            alert('Please select a course');
+            // Hide the questions container if no course is selected
+            document.getElementById('questions-container').style.display = 'none';
+
+        }
+    }
+
+</script>
+
+
+</body>
+</html>
